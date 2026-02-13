@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+/* =========================
+   Base Setup
+========================= */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Light Theme */
+    --light-hover: #fcf4ff;
+    --bg-color: #ffffff;
+    --text-color: #000000;
+  }
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: inherit;
+    background-color: var(--bg-color);
+    color: var(--text-color);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =========================
+   Utilities
+========================= */
+@layer utilities {
+  .font-ovo {
+    font-family: "Ovo", serif;
+  }
+
+  /* Custom Box Shadows */
+  .shadow-black {
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  .shadow-white {
+    box-shadow: 4px 4px 0 #fff;
+  }
+
+  .hover\:shadow-black:hover {
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  .hover\:shadow-white:hover {
+    box-shadow: 4px 4px 0 #fff;
+  }
+}
+
+/* =========================
+   Global
+========================= */
+html {
+  scroll-behavior: smooth;
 }
