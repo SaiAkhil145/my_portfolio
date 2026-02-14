@@ -10,6 +10,7 @@ import MyServices from "./components/MyServices";
 import Navbar from "./components/Navbar";
 import Socials from "./components/Socials";
 import Work from "./components/Work";
+import Experience from "./components/Experience";
 
 /* Container Animation */
 const containerVariants = {
@@ -68,6 +69,11 @@ export default function Home() {
         {/* About */}
         <motion.div variants={sectionVariants}>
           <About />
+        </motion.div>
+
+        {/* Experience */}
+        <motion.div variants={sectionVariants}>
+              <Experience/>
         </motion.div>
 
         {/* Services */}

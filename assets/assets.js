@@ -216,3 +216,20 @@ export const socialLinks = [
 export const toolsData = [
     assets.vscode, assets.firebase, assets.mongodb, assets.figma, assets.git,assets.github,assets.npm,assets.postman,assets.redux
 ];
+
+export const experienceData = [
+  {
+    icon: assets.project_icon,
+    title: "Associate Software Engineer",
+    company: "Busitron IT Solutions Pvt Ltd.",
+    duration: "Aug 2024 – Apr 2025",
+    points: [
+      "Developed reusable and scalable React components using Hooks.",
+      "Optimized state management using Redux Toolkit for complex UI flows.",
+      "Built dynamic, validated forms for admin dashboards.",
+      "Integrated REST APIs to handle real-time data updates.",
+      "Collaborated in Agile sprint cycles to deliver feature enhancements."
+    ],
+    tech: "React.js, Node.js, Express.js, Redux Toolkit, REST APIs, Tailwind CSS, Git",
+  },
+];

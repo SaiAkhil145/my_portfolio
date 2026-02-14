@@ -69,6 +69,11 @@ const Navbar = () => {
               About
             </a>
           </li>
+          <li>
+            <a href="#experience" className="font-ovo text-black hover:text-gray-600 transition">
+              Experience
+            </a>
+          </li>
 
           <li>
             <a href="#services" className="font-ovo text-black hover:text-gray-600 transition">
@@ -166,7 +171,15 @@ const Navbar = () => {
               About
             </a>
           </li>
-
+          <li>
+            <a
+              href="#experience"
+              onClick={() => setSideBarOpen(false)}
+              className="font-ovo text-black hover:text-gray-600 transition"
+            >
+              Experience
+            </a>
+          </li>
           <li>
             <a
               href="#services"

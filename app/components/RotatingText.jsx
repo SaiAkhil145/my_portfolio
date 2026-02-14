@@ -11,36 +11,45 @@ const roles = [
 
 export default function RotatingText() {
   const [index, setIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [displayedText, setDisplayedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Fade out smoothly
-      setVisible(false);
+    const currentRole = roles[index].text;
 
-      setTimeout(() => {
-        setIndex((prev) => (prev + 1) % roles.length);
-        setVisible(true);
-      }, 500);
-    }, 3000);
+    const typingSpeed = isDeleting ? 40 : 80;
 
-    return () => clearInterval(interval);
-  }, []);
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing
+        setDisplayedText(currentRole.slice(0, displayedText.length + 1));
+
+        if (displayedText === currentRole) {
+          setTimeout(() => setIsDeleting(true), 1200);
+        }
+      } else {
+        // Deleting
+        setDisplayedText(currentRole.slice(0, displayedText.length - 1));
+
+        if (displayedText === "") {
+          setIsDeleting(false);
+          setIndex((prev) => (prev + 1) % roles.length);
+        }
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, index]);
 
   return (
     <span
       className={`
         inline-block font-light tracking-wide
-        transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]
         ${roles[index].color}
-        ${
-          visible
-            ? "opacity-100 translate-y-0 scale-100 blur-0"
-            : "opacity-0 translate-y-2 scale-95 blur-sm"
-        }
       `}
     >
-      {roles[index].text}
+      {displayedText}
+      <span className="animate-pulse ml-1">|</span>
     </span>
   );
 }

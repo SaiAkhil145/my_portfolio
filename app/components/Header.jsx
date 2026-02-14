@@ -6,16 +6,17 @@ import RotatingText from "./RotatingText";
 const Header = () => {
   return (
     <section
-      className="w-11/12 max-w-4xl mx-auto
+      className="
+        w-11/12 max-w-4xl mx-auto
         min-h-screen
         flex flex-col items-center justify-center
         text-center
-        gap-6
-        px-4  pt-24
+        gap-8
+        px-4 pt-24
       "
     >
       {/* Profile */}
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center gap-4">
         <Image
           src={assets.profile_img}
           alt="Sai Revu"
@@ -23,7 +24,8 @@ const Header = () => {
         />
 
         <h3 className="flex items-center gap-2 text-xl md:text-2xl font-ovo">
-          Hi! I&apos;m  <span className="font-semibold text-2xl">Sai Revu</span>
+          Hi! I&apos;m{" "}
+          <span className="font-semibold text-2xl">Sai Revu</span>
           <Image
             src={assets.hand_icon}
             alt=""
@@ -33,21 +35,24 @@ const Header = () => {
       </div>
 
       {/* Main Heading */}
-      <h1 className="text-3xl sm:text-5xl lg:text-[64px] leading-tight font-ovo">
-        <RotatingText/>
-        <span className="block sm:inline"> based in India.</span>
-      </h1>
+      <div className="flex flex-col items-center gap-2">
+        <h1 className="text-3xl sm:text-5xl lg:text-[64px] leading-tight font-ovo">
+          <RotatingText />
+        </h1>
+
+        <p className="text-gray-900 text-xl sm:text-2xl lg:text-3xl font-outfit">
+          based in India.
+        </p>
+      </div>
 
       {/* Description */}
-<p className="max-w-2xl text-gray-600 text-base md:text-lg font-outfit leading-relaxed">
-  I build scalable web applications using modern technologies with focus on performance, clean UI, and great user experience.
-</p>
-
-
-
+      <p className="max-w-2xl text-gray-600 text-base md:text-lg font-outfit leading-relaxed">
+        I build scalable web applications using modern technologies with focus
+        on performance, clean UI, and exceptional user experience.
+      </p>
 
       {/* Buttons */}
-      <div className="flex flex-col sm:flex-row items-center gap-4 mt-4">
+      <div className="flex flex-col sm:flex-row items-center gap-4 mt-6">
         <a
           href="#contact"
           className="
@@ -55,7 +60,8 @@ const Header = () => {
             rounded-full
             bg-black text-white
             flex items-center gap-2
-            hover:scale-105 transition
+            hover:scale-105 hover:bg-gray-800
+            transition duration-300
             shadow-md
           "
         >
@@ -71,7 +77,8 @@ const Header = () => {
             rounded-full
             border border-gray-400
             flex items-center gap-2
-            hover:bg-gray-100 transition
+            hover:bg-gray-100
+            transition duration-300
           "
         >
           My Resume
