@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 const roles = [
-  { text: "MERN Stack Developer", color: "text-emerald-600" },
-  { text: "Frontend Developer", color: "text-rose-500" },
-  { text: "Backend Developer", color: "text-sky-600" },
-  { text: "Full Stack Developer", color: "text-amber-600" },
+  { text: "MERN Stack Developer", color: "text-emerald-500" },
+  { text: "Frontend Developer", color: "text-rose-400" },
+  { text: "Backend Developer", color: "text-sky-500" },
+  { text: "Full Stack Developer", color: "text-amber-500" },
 ];
 
 export default function RotatingText() {
@@ -15,21 +15,21 @@ export default function RotatingText() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const currentRole = roles[index].text;
+    const currentText = roles[index].text;
 
-    const typingSpeed = isDeleting ? 40 : 80;
+    let typingSpeed = isDeleting ? 60 : 110;
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
-        // Typing
-        setDisplayedText(currentRole.slice(0, displayedText.length + 1));
+        // Typing forward
+        setDisplayedText(currentText.slice(0, displayedText.length + 1));
 
-        if (displayedText === currentRole) {
-          setTimeout(() => setIsDeleting(true), 1200);
+        if (displayedText === currentText) {
+          setTimeout(() => setIsDeleting(true), 1800); // Pause before deleting
         }
       } else {
-        // Deleting
-        setDisplayedText(currentRole.slice(0, displayedText.length - 1));
+        // Deleting backward
+        setDisplayedText(currentText.slice(0, displayedText.length - 1));
 
         if (displayedText === "") {
           setIsDeleting(false);
@@ -45,11 +45,22 @@ export default function RotatingText() {
     <span
       className={`
         inline-block font-light tracking-wide
+        transition-colors duration-500
         ${roles[index].color}
       `}
     >
       {displayedText}
-      <span className="animate-pulse ml-1">|</span>
+      <span className="ml-1 animate-blink">|</span>
+
+      <style jsx>{`
+        @keyframes blink {
+          0%, 50%, 100% { opacity: 1; }
+          25%, 75% { opacity: 0; }
+        }
+        .animate-blink {
+          animation: blink 1s infinite;
+        }
+      `}</style>
     </span>
   );
 }
