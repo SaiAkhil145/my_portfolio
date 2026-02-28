@@ -9,35 +9,37 @@ const Navbar = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
   const [mounted, setMounted] = useState(false);
-  /* Scroll effect */
+
   useEffect(() => {
     const handleScroll = () => {
-      setScroll(window.scrollY > 50);
+      setScroll(window.scrollY > 40);
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-   useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 
-  if(!mounted) return null;
+  if (!mounted) return null;
 
   return (
     <>
       {/* Navbar */}
       <nav
         className={`
-          w-full fixed top-0 left-0
-          px-5 lg:px-8 xl:px-[8%] py-4
+          fixed top-0 left-0 w-full z-50
+          px-6 lg:px-10 xl:px-[8%] py-4
           flex items-center justify-between
-          z-50 transition-all duration-300
-          bg-white
+          transition-all duration-300
 
-          ${scroll ? "shadow-sm" : ""}
+          ${
+            scroll
+              ? "bg-white/70 backdrop-blur-xl shadow-sm border-b border-gray-100"
+              : "bg-transparent"
+          }
         `}
       >
         {/* Logo */}
@@ -52,52 +54,30 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul
-          className="
+          className={`
             hidden md:flex items-center gap-6 lg:gap-8
-            rounded-full px-10 py-2.5
-            bg-white shadow-sm
-          "
+            px-8 py-2.5 rounded-full
+            transition-all duration-300
+
+            ${
+              scroll
+                ? "bg-white/80 backdrop-blur-md shadow-sm border border-gray-100"
+                : "bg-white/60 backdrop-blur-md border border-white/40"
+            }
+          `}
         >
-          <li>
-            <a href="#top" className="font-ovo text-black hover:text-gray-600 transition">
-              Home
-            </a>
-          </li>
-
-          <li>
-            <a href="#about" className="font-ovo text-black hover:text-gray-600 transition">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#experience" className="font-ovo text-black hover:text-gray-600 transition">
-              Experience
-            </a>
-          </li>
-
-          <li>
-            <a href="#services" className="font-ovo text-black hover:text-gray-600 transition">
-              Services
-            </a>
-          </li>
-
-          <li>
-            <a href="#work" className="font-ovo text-black hover:text-gray-600 transition">
-              My Work
-            </a>
-          </li>
-
-          <li>
-            <a href="#socials" className="font-ovo text-black hover:text-gray-600 transition">
-              Socials
-            </a>
-          </li>
-
-          <li>
-            <a href="#contact" className="font-ovo text-black hover:text-gray-600 transition">
-              Contact
-            </a>
-          </li>
+          {["Home", "About", "Experience", "Services", "My Work", "Socials", "Contact"].map(
+            (item) => (
+              <li key={item}>
+                <a
+                  href={`#${item.toLowerCase().replace(" ", "")}`}
+                  className="text-gray-800 hover:text-black transition font-medium"
+                >
+                  {item}
+                </a>
+              </li>
+            )
+          )}
         </ul>
 
         {/* Right Section */}
@@ -107,21 +87,21 @@ const Navbar = () => {
           <a
             href="#contact"
             className="
-              hidden lg:flex items-center gap-3 px-8 py-2.5
-              border border-gray-400
-              rounded-full ml-3 font-ovo
-              text-black
-              hover:bg-gray-100
-              transition
+              hidden lg:flex items-center gap-2
+              px-6 py-2.5
+              rounded-full
+              bg-black text-white
+              hover:bg-gray-800
+              transition duration-300
             "
           >
             Contact
-            <Image src={assets.arrow_icon} className="w-3" alt="arrow" />
+            <Image src={assets.arrow_icon} className="w-3 invert" alt="arrow" />
           </a>
 
           {/* Mobile Menu Button */}
           <button
-            className="block md:hidden ml-2"
+            className="block md:hidden"
             onClick={() => setSideBarOpen(true)}
           >
             <Image src={assets.menu_black} alt="menu" className="w-6" />
@@ -129,21 +109,17 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        <ul
+        <div
           className={`
-            flex md:hidden flex-col gap-5
-            py-20 px-8
-            fixed right-0 top-0 bottom-0
-            w-64 h-screen
-            bg-white
-            z-50
-
-            transition-transform duration-500
+            fixed top-0 right-0 h-screen w-64
+            bg-white/90 backdrop-blur-xl
+            shadow-xl
+            transform transition-transform duration-500
             ${sideBarOpen ? "translate-x-0" : "translate-x-full"}
           `}
         >
-          {/* Close Button */}
-          <div className="absolute right-8 top-6">
+          {/* Close */}
+          <div className="flex justify-end p-6">
             <Image
               src={assets.close_black}
               alt="close"
@@ -152,74 +128,22 @@ const Navbar = () => {
             />
           </div>
 
-          <li>
-            <a
-              href="#top"
-              onClick={() => setSideBarOpen(false)}
-              className="font-ovo text-black hover:text-gray-600 transition"
-            >
-              Home
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#about"
-              onClick={() => setSideBarOpen(false)}
-              className="font-ovo text-black hover:text-gray-600 transition"
-            >
-              About
-            </a>
-          </li>
-          <li>
-            <a
-              href="#experience"
-              onClick={() => setSideBarOpen(false)}
-              className="font-ovo text-black hover:text-gray-600 transition"
-            >
-              Experience
-            </a>
-          </li>
-          <li>
-            <a
-              href="#services"
-              onClick={() => setSideBarOpen(false)}
-              className="font-ovo text-black hover:text-gray-600 transition"
-            >
-              Services
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#work"
-              onClick={() => setSideBarOpen(false)}
-              className="font-ovo text-black hover:text-gray-600 transition"
-            >
-              My Work
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#socials"
-              onClick={() => setSideBarOpen(false)}
-              className="font-ovo text-black hover:text-gray-600 transition"
-            >
-              Socials
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#contact"
-              onClick={() => setSideBarOpen(false)}
-              className="font-ovo text-black hover:text-gray-600 transition"
-            >
-              Contact
-            </a>
-          </li>
-        </ul>
+          <ul className="flex flex-col gap-6 px-8">
+            {["Home", "About", "Experience", "Services", "My Work", "Socials", "Contact"].map(
+              (item) => (
+                <li key={item}>
+                  <a
+                    href={`#${item.toLowerCase().replace(" ", "")}`}
+                    onClick={() => setSideBarOpen(false)}
+                    className="text-gray-800 hover:text-black transition"
+                  >
+                    {item}
+                  </a>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
       </nav>
     </>
   );

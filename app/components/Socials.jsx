@@ -1,59 +1,96 @@
-import { socialLinks } from '@/assets/assets'
-import Image from 'next/image'
-import React from 'react'
+"use client";
+
+import { socialLinks } from "@/assets/assets";
+import Image from "next/image";
+import React from "react";
 
 const Socials = () => {
   return (
-    <div
-      id='socials'
-      className='w-full px-[6%] sm:px-[10%] lg:px-[12%] py-20 bg-white'
+    <section
+      id="socials"
+      className="
+        relative
+        w-full
+        max-w-5xl
+        mx-auto
+        px-6 sm:px-10 lg:px-12
+        py-24
+        text-center
+      "
     >
-      {/* Heading */}
-      <h4 className='text-center mb-2 text-lg font-ovo text-gray-600 tracking-wide uppercase'>
-        Connect With Me
-      </h4>
+      {/* Header */}
+      <div className="mb-14">
+        <p className="text-gray-500 mb-2">
+          Connect With Me
+        </p>
 
-      <h2 className='text-center text-4xl sm:text-5xl font-ovo mb-6'>
-        Find Me Online
-      </h2>
+        <h2 className="text-4xl sm:text-5xl font-bold">
+          Find Me Online
+        </h2>
 
-      <p className='text-center max-w-xl mx-auto text-gray-600 mb-14 font-ovo leading-relaxed'>
-        Feel free to explore my coding profiles and connect with me on professional platforms.
-      </p>
+        <p className="text-gray-600 mt-4 max-w-xl mx-auto leading-relaxed">
+          Feel free to explore my coding profiles and connect with me on
+          professional platforms.
+        </p>
+      </div>
 
       {/* Social Grid */}
-      <div className='grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto'>
+      <div className="
+        grid
+        grid-cols-2 sm:grid-cols-4
+        gap-6
+      ">
         {socialLinks.map((item, index) => (
           <a
             key={index}
             href={item.url}
-            target='_blank'
-            rel='noopener noreferrer'
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={item.name}
-            className='group flex flex-col items-center justify-center gap-3 p-6 
-            bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300
-            hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-gray-400'
+            className="
+              group
+              flex flex-col items-center justify-center
+              gap-4
+              p-6
+              rounded-2xl
+              bg-white/80 backdrop-blur-md
+              border border-gray-100
+              shadow-sm
+              hover:shadow-xl hover:-translate-y-1
+              transition duration-300
+            "
           >
             {/* Icon */}
-            <div className='p-3 rounded-full bg-gray-100 group-hover:bg-gray-200 transition'>
+            <div className="
+              w-14 h-14
+              flex items-center justify-center
+              rounded-xl
+              bg-gray-100
+              group-hover:bg-gray-200
+              transition
+            ">
               <Image
                 src={item.icon}
                 alt={item.name}
-                width={40}
-                height={40}
-                className='group-hover:scale-110 transition'
+                width={32}
+                height={32}
+                className="group-hover:scale-110 transition duration-300"
               />
             </div>
 
             {/* Name */}
-            <span className='text-sm font-medium text-gray-700 group-hover:text-black tracking-wide'>
+            <span className="
+              text-sm font-medium text-gray-700
+              group-hover:text-black
+              transition
+            ">
               {item.name}
             </span>
           </a>
         ))}
       </div>
-    </div>
-  )
-}
+    </section>
+  );
+};
 
-export default Socials
+export default Socials;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -12,34 +13,44 @@ const roles = [
 export default function RotatingText() {
   const [index, setIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [phase, setPhase] = useState("typing"); 
+  // typing | pause | deleting
 
   useEffect(() => {
     const currentText = roles[index].text;
+    let timeout;
 
-    let typingSpeed = isDeleting ? 60 : 110;
-
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        // Typing forward
-        setDisplayedText(currentText.slice(0, displayedText.length + 1));
-
-        if (displayedText === currentText) {
-          setTimeout(() => setIsDeleting(true), 1800); // Pause before deleting
-        }
+    if (phase === "typing") {
+      if (displayedText.length < currentText.length) {
+        timeout = setTimeout(() => {
+          setDisplayedText(currentText.slice(0, displayedText.length + 1));
+        }, 100); // typing speed
       } else {
-        // Deleting backward
-        setDisplayedText(currentText.slice(0, displayedText.length - 1));
-
-        if (displayedText === "") {
-          setIsDeleting(false);
-          setIndex((prev) => (prev + 1) % roles.length);
-        }
+        timeout = setTimeout(() => {
+          setPhase("pause");
+        }, 1500); // pause after full word
       }
-    }, typingSpeed);
+    }
+
+    else if (phase === "pause") {
+      timeout = setTimeout(() => {
+        setPhase("deleting");
+      }, 300);
+    }
+
+    else if (phase === "deleting") {
+      if (displayedText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayedText(currentText.slice(0, displayedText.length - 1));
+        }, 60); // deleting speed
+      } else {
+        setPhase("typing");
+        setIndex((prev) => (prev + 1) % roles.length);
+      }
+    }
 
     return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting, index]);
+  }, [displayedText, phase, index]);
 
   return (
     <span

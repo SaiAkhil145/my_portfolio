@@ -1,54 +1,161 @@
-import Image from 'next/image'
-import React, { useState } from 'react'
-import { assets } from '@/assets/assets'
-const Contact = () => {
+"use client";
 
-  const [result, setResult] = useState('');
+import Image from "next/image";
+import React, { useState } from "react";
+import { assets } from "@/assets/assets";
+
+const Contact = () => {
+  const [result, setResult] = useState("");
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
     const formData = new FormData(event.target);
-    formData.append("access_key", "2208dcdc-1213-4a0b-b8bf-29846a62ffa4");
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      body: formData
+      body: formData,
     });
 
     const data = await response.json();
-    setResult(data.success ? "Success!" : "Error");
+    setResult(data.success ? "Message sent successfully!" : "Something went wrong.");
   };
+
   return (
-    <div
-      id='contact'
-      style={{ backgroundImage: "url('/footer-bg-color.png')" }}
-      className='w-full px-[6%] sm:px-[10%] lg:px-[12%] py-20 scroll-mt-20 
-      bg-cover bg-center'
+    <section
+      id="contact"
+      className="
+        relative
+        w-full
+        max-w-5xl
+        mx-auto
+        px-6 sm:px-10 lg:px-12
+        py-24
+        text-center
+      "
     >
-      <h4 className='text-center mb-2 text-lg font-ovo text-gray-600'>
-        Get In Touch
-      </h4>
+      {/* Header */}
+      <div className="mb-14">
+        <p className="text-gray-500 mb-2">
+          Get In Touch
+        </p>
 
-      <h2 className='text-center text-4xl sm:text-5xl font-ovo'>
-        Contact Me
-      </h2>
+        <h2 className="text-4xl sm:text-5xl font-bold">
+          Contact Me
+        </h2>
 
-      <p className='text-center max-w-2xl mx-auto mt-5 mb-16 font-ovo text-gray-600'>
-        Have a project in mind, want to collaborate, or just say hello?
-        Feel free to reach out and I’ll get back to you as soon as possible.
-      </p>
-      <form onSubmit={onSubmit} className='max-w-2xl mx-auto'>
-       <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-10 mb-8'>
-           <input className='flex-1 outline-nonw p-3 border-[0.5px] border-gray-400 rounded-md bg-white' type="text" placeholder='Enter your name...' required name='name'/>
-           <input className='flex-1 outline-nonw p-3 border-[0.5px] border-gray-400 rounded-md bg-white' type="email" placeholder='Enter your Email..' required name='email'/>
-       </div>
-       <textarea className='w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md bg-white mb-6' rows={6} placeholder='Enter your message' name="message" id="" required></textarea>
-       <button type='submit' className='py-3 px-8 w-max flex items-center justify-between gap-2 bg-black/80 text-white rounded-full mx-auto hover:bg-black duration-500'>Submit Now <Image src={assets.right_arrow_white} alt='right arrow' className='w-4'/></button>
+        <p className="text-gray-600 mt-4 max-w-2xl mx-auto leading-relaxed">
+          Have a project in mind, want to collaborate, or just say hello?
+          Feel free to reach out and I’ll get back to you as soon as possible.
+        </p>
+      </div>
 
-       <p className='mt-4'>{result}</p>
+      {/* Form Card */}
+      <form
+        onSubmit={onSubmit}
+        className="
+          bg-white/80 backdrop-blur-md
+          rounded-2xl
+          p-8 sm:p-10
+          shadow-sm
+          border border-gray-100
+          text-left
+        "
+      >
+        {/* Inputs */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+
+          <input
+            type="text"
+            name="name"
+            required
+            placeholder="Your Name"
+            className="
+              w-full
+              px-4 py-3
+              rounded-lg
+              bg-white
+              border border-gray-200
+              outline-none
+              focus:border-black
+              transition
+            "
+          />
+
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="Your Email"
+            className="
+              w-full
+              px-4 py-3
+              rounded-lg
+              bg-white
+              border border-gray-200
+              outline-none
+              focus:border-black
+              transition
+            "
+          />
+
+        </div>
+
+        <textarea
+          name="message"
+          rows={6}
+          required
+          placeholder="Your Message"
+          className="
+            w-full
+            px-4 py-3
+            rounded-lg
+            bg-white
+            border border-gray-200
+            outline-none
+            focus:border-black
+            transition
+            mb-6
+          "
+        ></textarea>
+
+        {/* Button */}
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="
+              group
+              flex items-center gap-3
+              px-8 py-3
+              bg-black text-white
+              rounded-full
+              hover:bg-gray-800
+              transition duration-300
+            "
+          >
+            Send Message
+            <Image
+              src={assets.right_arrow_white}
+              alt="arrow"
+              className="w-4 group-hover:translate-x-1 transition"
+            />
+          </button>
+        </div>
+
+        {/* Result */}
+        {result && (
+          <p className="
+            text-center
+            mt-6
+            text-sm
+            text-gray-600
+          ">
+            {result}
+          </p>
+        )}
       </form>
-    </div>
-  )
-}
+    </section>
+  );
+};
 
-export default Contact
+export default Contact;

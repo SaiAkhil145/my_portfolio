@@ -43,6 +43,16 @@ import github_logo from './github_logo.png'
 import linkedin_logo from './linkedin_logo.png'
 import leetcode_logo from './leetCode_logo.png'
 import hackerrank_logo from './HackerRank_logo.png'
+import react_logo from './react.png'
+import nextjs_logo from './nextjs.png'
+import express_logo from './express_icon.png'
+import javascript_logo from './javascript.png'
+import html_logo from './html.png'
+import css_logo from './css.png'
+import mysql_logo from './mysql.png'
+import framer_motion_logo from './framer-motion.png'
+import tailwind_css_logo from './tailwind_css.png'
+
 
 export const assets = {
     // user_image,
@@ -90,7 +100,16 @@ export const assets = {
     github_logo,
     linkedin_logo,
     hackerrank_logo,
-    leetcode_logo
+    leetcode_logo,
+    react_logo,
+    nextjs_logo,
+    express_logo,
+    javascript_logo,
+    html_logo,
+    css_logo,
+    mysql_logo,
+    framer_motion_logo,
+    tailwind_css_logo,
 };
 
 export const workData = [
@@ -119,7 +138,28 @@ export const workData = [
     live: 'https://forever-fullstack-xvrc.vercel.app/',
     github: 'https://github.com/SaiAkhil145/forever-fullstack',
   },
-
+  {
+    title:'Netflix Clone - Video Streaming Platform',
+    description:
+      '',
+      images:[
+          '/work-4.png',
+      ],
+      live:'https://video-streaming-platform.netlify.app/',
+      github:'https://github.com/SaiAkhil145/Video-streaming-platform'
+  },
+  {
+    title:"Cara Clothing",
+    description:
+      "built an scalable static ecommerce web application using html & css",
+      images:[
+        "/work-5.png",
+        "/work-5-home.png",
+        "/work-5-contact.png",
+      ],
+      live:"https://cara-clothing-myproject.netlify.app/cart",
+      github:"https://github.com/SaiAkhil145/Cara-clothing"
+  },
   {
     title: 'Crypto Market App',
     description:
@@ -169,12 +209,7 @@ export const serviceData = [
 
 
 export const infoList = [
-  {
-    icon: assets.code_icon,
-    iconDark: assets.code_icon_dark,
-    title: "Tech Stack",
-    description: "HTML, CSS, JavaScript, React.js, Next.js, Node.js, Express.js, MongoDB, Java, MySQL, Firebase, Data Structures & Algoithms, System Design",
-  },
+  
   {
     icon: assets.edu_icon,
     iconDark: assets.edu_icon_dark,
@@ -214,9 +249,22 @@ export const socialLinks = [
 ];
 
 export const toolsData = [
-    assets.vscode, assets.firebase, assets.mongodb, assets.figma, assets.git,assets.github,assets.npm,assets.postman,assets.redux
+    assets.vscode, assets.firebase, assets.mongodb, assets.figma, assets.git,assets.github,assets.npm,assets.postman
 ];
 
+export const skillsData = [
+  { name: "React", icon: assets.react_logo },
+  { name: "Next.js", icon: assets.nextjs_logo },
+  { name: "MongoDB", icon: assets.mongodb },
+  { name: "Redux", icon: assets.redux },
+  { name: "Express",icon:assets.express_logo},
+  { name:"Node",icon:assets.mobile_icon},
+  { name:"HTML",icon:assets.html_logo},
+  { name:"CSS", icon:assets.css_logo},
+  { name:"JavaScript", icon:assets.javascript_logo},
+  { name:"Framer Motion",icon:assets.framer_motion_logo},
+  { name:"Tailwind Css",icon:assets.tailwind_css_logo}
+];
 export const experienceData = [
   {
     icon: assets.project_icon,
